@@ -1,0 +1,5 @@
+git checkout -b feature/3_IAM_Manage_Users_Roles_and_Permissions
+git add .
+git commit -m "3 - IAM - Manage Users, Roles and Permissions"
+git push -u origin main
+git checkout feature/3_IAM_Manage_Users_Roles_and_Permissions
