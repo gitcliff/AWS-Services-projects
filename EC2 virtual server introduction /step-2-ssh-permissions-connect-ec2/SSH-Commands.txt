@@ -1,0 +1,47 @@
+# ------------------------------
+# 🧩 SECTION TITLE: Securely move SSH key and connect to EC2 (Windows WSL + PowerShell)
+# ------------------------------
+
+mv /mnt/c/Users/19168/Downloads/docker-server.pem ~/.ssh/  
+# ✅ What it does: Moves the AWS private key from Windows Downloads folder (accessed via WSL) to your Linux ~/.ssh directory  
+# 🧠 Why it matters: Places the SSH key in the standard Linux location for SSH keys, enabling secure and convenient use  
+
+ls -l ~/.ssh/docker-server.pem  
+# ✅ What it does: Lists the file details (permissions, size, owner) of the moved key  
+# 🧠 Why it matters: Verifies that the key file exists in the right place before changing permissions  
+
+chmod 400 ~/.ssh/docker-server.pem  
+# ✅ What it does: Sets strict read-only permissions so only the file owner can access the private key  
+# 🧠 Why it matters: SSH requires private keys to have restricted permissions to avoid security warnings or connection failure  
+
+ls -l ~/.ssh/docker-server.pem  
+# ✅ What it does: Lists the file details again to confirm the permissions changed successfully  
+# 🧠 Why it matters: Ensures the private key meets SSH's security requirements before connection  
+
+ssh -i ~/.ssh/docker-server.pem ec2-user@<PUBLIC_IP_ADDRESS>  
+# ✅ What it does: Uses the private key to securely connect to your AWS EC2 instance via SSH  
+# 🧠 Why it matters: Provides you with remote access to manage and deploy on your EC2 server  
+
+# ------------------------------
+# ▶️ HOW TO RUN / EXECUTE THIS CODE IN POWERSHELL (Windows Native)
+# ------------------------------
+
+# Move the key from Windows Downloads to your .ssh directory  
+Move-Item -Path "$env:USERPROFILE\Downloads\docker-server.pem" -Destination "$env:USERPROFILE\.ssh"  
+# ✅ What it does: Moves the private key file to the .ssh folder in your user profile  
+# 🧠 Why it matters: Organizes SSH keys in the expected location for SSH clients on Windows  
+
+# Check the key file details and confirm presence  
+Get-ChildItem -Path "$env:USERPROFILE\.ssh\docker-server.pem" | Format-List  
+# ✅ What it does: Shows detailed information about the key file  
+# 🧠 Why it matters: Confirms that the key file is present and ready for permission changes  
+
+# Set permissions on the key file to read-only for your user account  
+icacls "$env:USERPROFILE\.ssh\docker-server.pem" /inheritance:r /grant:r "$($env:USERNAME):(R)"  
+# ✅ What it does: Removes inherited permissions and grants only read access to your user  
+# 🧠 Why it matters: Enforces strict file permissions to satisfy SSH client security requirements  
+
+# Connect to EC2 instance using the private key  
+ssh -i $env:USERPROFILE\.ssh\docker-server.pem ec2-user@<PUBLIC_IP_ADDRESS>  
+# ✅ What it does: Uses the private key to open an SSH session to your EC2 instance  
+# 🧠 Why it matters: Securely manages your remote AWS server for administration or deployment  

@@ -1,0 +1,11 @@
+# 📦 SUMMARY  
+# This repository contains a full-stack example application built with React for the frontend and Node.js (Express) for the backend.  
+# Language/Platform: JavaScript (React + Node.js/Express)  
+# What you'll learn: How to connect a React frontend with a Node.js backend, API calls, routing, state management, and basic CRUD operations.  
+# Outcome: After running this project, you'll have a working web app with a React user interface communicating with a Node.js REST API server.  
+# Why this matters: Understanding this architecture is crucial for building modern web applications that separate frontend and backend concerns efficiently.
+
+# ⚠️ NOTES TO AI:  
+# - The project link provided is https://github.com/techworld-with-nana/react-nodejs-example  
+# - This repo is widely used in tutorials to demonstrate full-stack JavaScript development with React and Node.js  
+

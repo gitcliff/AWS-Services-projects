@@ -1,0 +1,89 @@
+# ------------------------------
+# 🧩 SECTION TITLE: Install and run Docker on AWS EC2 (Amazon Linux)
+# ------------------------------
+
+sudo yum update  
+# ✅ What it does: Updates all installed packages on the EC2 instance to the latest version  
+# 🧠 Why it matters: Ensures your system has the latest security patches and software updates
+
+sudo yum install docker  
+# ✅ What it does: Installs Docker on the EC2 instance  
+# 🧠 Why it matters: Docker is required to run containerized applications on the server
+
+docker -v  
+# ✅ What it does: Displays the installed Docker version  
+# 🧠 Why it matters: Verifies Docker was installed successfully
+
+sudo service docker start  
+# ✅ What it does: Starts the Docker daemon/service on the EC2 instance  
+# 🧠 Why it matters: Docker must be running to execute containers
+
+ps aux | grep docker  
+# ✅ What it does: Lists running processes and filters for Docker-related processes  
+# 🧠 Why it matters: Confirms Docker service is active and running
+
+sudo usermod -aG docker $USER  
+# ✅ What it does: Adds the current user to the 'docker' group allowing Docker commands without sudo  
+# 🧠 Why it matters: Simplifies usage by removing need for sudo with Docker commands
+
+groups  
+# ✅ What it does: Shows all groups the current user belongs to  
+# 🧠 Why it matters: Verifies if the user was added to the 'docker' group successfully
+
+exit  
+# ✅ What it does: Logs out from the current SSH session  
+# 🧠 Why it matters: Needed to apply group membership changes after usermod
+
+ssh -i ~/.ssh/aws-learning-server-key.pem ec2-user@publicip  
+# ✅ What it does: SSH back into the EC2 instance with your private key  
+# 🧠 Why it matters: Starts a new session with updated group permissions
+
+docker run redis  
+# ✅ What it does: Pulls and runs the official Redis container image from Docker Hub  
+# 🧠 Why it matters: Tests Docker container runtime to ensure Docker works properly on the instance
+
+# ------------------------------
+# ▶️ HOW TO RUN / EXECUTE THIS CODE  
+# ------------------------------
+# sudo yum update  
+#   ✅ Updates all packages to the latest version for security and stability  
+#   🔄 Equivalent Debian-based command: sudo apt update && sudo apt upgrade -y
+
+# sudo yum install docker  
+#   ✅ Installs Docker on Amazon Linux  
+#   🔄 Equivalent Debian-based command: sudo apt install -y docker.io
+
+# docker -v  
+#   ✅ Checks installed Docker version  
+#   🔄 Same command on any Linux shell
+
+# sudo service docker start  
+#   ✅ Starts the Docker daemon  
+#   🔄 Equivalent systemctl command: sudo systemctl start docker
+
+# ps aux | grep docker  
+#   ✅ Confirms Docker daemon is running  
+#   🔄 Same command on any Linux shell
+
+# sudo usermod -aG docker $USER  
+#   ✅ Adds user to Docker group for passwordless Docker commands  
+#   🔄 PowerShell equivalent for adding user to a group:  
+#     Add-LocalGroupMember -Group "docker-users" -Member $env:USERNAME
+
+# groups  
+#   ✅ Lists all groups user belongs to  
+#   🔄 PowerShell equivalent:  
+#     whoami /groups
+
+# exit  
+#   ✅ Exits the SSH session so new group permissions apply  
+#   🔄 PowerShell equivalent: exit
+
+# ssh -i ~/.ssh/aws-learning-server-key.pem ec2-user@publicip  
+#   ✅ Reconnects to EC2 to refresh user permissions  
+#   🔄 PowerShell equivalent with OpenSSH:  
+#     ssh -i $env:USERPROFILE\.ssh\aws-learning-server-key.pem ec2-user@publicip
+
+# docker run redis  
+#   ✅ Runs Redis container as a test to verify Docker setup  
+#   🔄 Same command on any Docker-enabled system

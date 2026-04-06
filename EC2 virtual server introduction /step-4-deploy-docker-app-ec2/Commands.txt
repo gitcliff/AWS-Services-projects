@@ -1,0 +1,61 @@
+# ------------------------------  
+# 🧩 SECTION TITLE: Docker Image Setup and Run on EC2  
+# ------------------------------  
+
+docker login  
+# ✅ What it does: Logs in to Docker Hub to authenticate your user  
+# 🧠 Why it matters: Allows you to pull private or rate-limited Docker images from Docker Hub  
+
+docker pull gcliff/demo-app:1.0  
+# ✅ What it does: Downloads the Docker image tagged '1.0' to the EC2 instance  
+# 🧠 Why it matters: Ensures the required app image is locally available for running  
+
+docker images  
+# ✅ What it does: Lists all Docker images on the EC2 host  
+# 🧠 Why it matters: Lets you verify the image has been successfully pulled  
+
+docker run -p 3000:3080 -d gcliff/demo-app:1.0  
+# ✅ What it does: Runs the Docker container in detached mode  
+# 🧠 Why it matters: Maps port 3080 inside the container to port 3000 on the EC2 instance, making the app accessible externally  
+
+docker ps  
+# ✅ What it does: Shows running Docker containers  
+# 🧠 Why it matters: Confirms your container is up and running correctly  
+
+# ------------------------------  
+# 🧪 SECTION TITLE: Access Application  
+# ------------------------------  
+
+http://EC2-PublicIP:3000/  
+# ✅ What it does: Opens the application in a browser via EC2 public IP on port 3000  
+# 🧠 Why it matters: Confirms your app is running and accessible over the internet  
+
+# ------------------------------  
+# ▶️ HOW TO RUN / EXECUTE THIS COMMANDS  
+# ------------------------------  
+
+# In Linux/bash terminal on your EC2 instance:  
+docker login  
+# 🔄 Equivalent PowerShell command:  
+# Just run the same command in PowerShell; Docker CLI commands are consistent across shells  
+
+docker pull gcliff/demo-app:1.0  
+# 🔄 Equivalent PowerShell command: Same as above  
+
+docker images  
+# 🔄 Equivalent PowerShell command: Same as above  
+
+docker run -p 3000:3080 -d gcliff/demo-app:1.0  
+# 🔄 Equivalent PowerShell command: Same as above  
+
+docker ps  
+# 🔄 Equivalent PowerShell command: Same as above  
+
+# ------------------------------  
+# ✅ NOTES / GOTCHAS / TIPS  
+# ------------------------------  
+
+# - Ensure your EC2 security group allows inbound traffic on port 3000 (or whichever port you map).  
+# - The app listens on port 3080 inside the container, so port mapping must match accordingly.  
+# - Use `docker logs <container_id>` to debug if the container is not running as expected.  
+# - Always verify image versions to avoid running outdated containers.  

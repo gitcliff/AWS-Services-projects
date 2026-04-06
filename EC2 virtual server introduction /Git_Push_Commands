@@ -1,0 +1,5 @@
+git checkout -b feature/7_Introduction_to_EC2_Virtual_Cloud_Server
+git add .
+git commit -m "7 - Introduction to EC2 Virtual Cloud Server"
+git push -u origin main
+git checkout feature/7_Introduction_to_EC2_Virtual_Cloud_Server
